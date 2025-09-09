@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo do Gatão</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <header>
+        <h1 class="logo">Gatão <img src="https://em-content.zobj.net/source/apple/96/cat-face-with-wry-smile_1f63c.png" alt="Gato com sorriso maroto" class="header-cat-emoji"></h1>
+        <div id="wallet" class="wallet">
+            <span>Carteira:</span>
+            <span id="wallet-amount">R$ 100.00</span>
+        </div>
+    </header>
+
+    <main>
+        <div id="left-column" class="game-column">
+            <div id="controls" class="panel">
+                <h2>Apostar</h2>
+                <div class="timer-container">
+                    <p>Nova rodada em:</p>
+                    <div id="timer">10s</div>
+                </div>
+                <input type="number" id="bet-amount" placeholder="Valor da aposta" min="1">
+                
+                <div id="bet-presets">
+                    <button data-value="10">+10</button>
+                    <button data-value="25">+25</button>
+                    <button data-value="50">+50</button>
+                    <button data-action="half">1/2</button>
+                    <button data-action="max">MAX</button>
+                </div>
+
+                <button id="start-game-button">Apostar</button>
+                <div id="message-area" class="message-panel">
+                    <p>Faça sua aposta para iniciar!</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="center-column" class="game-column">
+            <div id="game-board">
+                <div class="cup-container" data-cup="1">
+                    <img src="https://images.vexels.com/media/users/3/201831/isolated/preview/2052e7aedc38b5f0db3e2c9c354291be-desenho-de-bola-de-la.png" class="ball-of-yarn" alt="Bola de lã">
+                    <img src="copo_apple.png" class="cup" alt="Copo">
+                </div>
+                <div class="cup-container" data-cup="2">
+                    <img src="https://images.vexels.com/media/users/3/201831/isolated/preview/2052e7aedc38b5f0db3e2c9c354291be-desenho-de-bola-de-la.png" class="ball-of-yarn" alt="Bola de lã">
+                    <img src="copo_apple.png" class="cup" alt="Copo">
+                </div>
+                <div class="cup-container" data-cup="3">
+                    <img src="https://images.vexels.com/media/users/3/201831/isolated/preview/2052e7aedc38b5f0db3e2c9c354291be-desenho-de-bola-de-la.png" class="ball-of-yarn" alt="Bola de lã">
+                    <img src="copo_apple.png" class="cup" alt="Copo">
+                </div>
+            </div>
+        </div>
+
+        <div id="right-column" class="game-column">
+            <div id="history-log" class="panel">
+                <h2>Últimas Rodadas</h2>
+                <ul id="history-list">
+                    </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

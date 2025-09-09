@@ -1,0 +1,307 @@
+/* Configurações Globais e Fonte */
+:root {
+    --primary-color: #ffde59; /* Um amarelo vibrante */
+    --text-color: #ffffff;
+    --dark-bg: #1a1a1a;
+    --blur-bg: rgba(22, 22, 22, 0.5);
+    --panel-width: 300px; /* Largura padrão dos painéis laterais */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background-color: var(--dark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Fundo da Floresta com Opacidade */
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.freepik.com/vetores-gratis/paisagem-de-floresta-em-aquarela_23-2149174918.jpg?semt=ais_hybrid&w=740&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15; /* Opacidade bem baixa como pedido */
+    z-index: -1;
+}
+
+/* Header Flutuante com Efeito Blur */
+header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    
+    background: var(--blur-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    display: flex; /* Para alinhar o texto e a imagem do emoji */
+    align-items: center;
+    gap: 8px; /* Espaço entre o texto "Gatão" e o emoji */
+}
+
+.header-cat-emoji {
+    height: 30px; /* Ajuste o tamanho conforme desejar */
+    width: auto;
+    vertical-align: middle;
+}
+
+.wallet {
+    font-size: 1.2em;
+    font-weight: 600;
+    background-color: rgba(0,0,0,0.2);
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+/* Área Principal do Jogo com 3 Colunas */
+main {
+    display: flex;
+    justify-content: space-between; /* Espaçamento entre as colunas */
+    align-items: flex-start; /* Alinha as colunas no topo */
+    width: 90%;
+    max-width: 1200px;
+    padding-top: 120px; /* Espaço para o header fixo */
+    gap: 30px; /* Espaço entre as colunas */
+    height: calc(100vh - 120px); /* Ocupa o restante da altura da tela */
+}
+
+.game-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo dentro da coluna */
+    height: 100%; /* Permite que o conteúdo interno ocupe a altura */
+}
+
+#left-column, #right-column {
+    flex-basis: var(--panel-width); /* Largura fixa para as colunas laterais */
+    flex-shrink: 0; /* Impede que encolham */
+    padding-top: 50px; /* Desce um pouco os painéis para não ficar muito grudado no header */
+}
+
+#center-column {
+    flex-grow: 1; /* Ocupa todo o espaço restante no centro */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centraliza os copos vertical e horizontalmente */
+}
+
+/* Estilo para os painéis (aposta e histórico) */
+.panel {
+    background: var(--blur-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    width: 100%; /* Ocupa a largura total da sua coluna */
+    text-align: center;
+}
+
+.panel h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+
+/* Jogo dos Copos (mantém a maior parte) */
+#game-board {
+    display: flex;
+    gap: 50px;
+    perspective: 1000px;
+    transition: transform 0.5s ease-out;
+}
+
+.cup-container {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s ease-in-out; 
+}
+
+.cup {
+    width: 120px;
+    height: auto;
+    transition: transform 0.4s ease-in-out;
+}
+
+.cup-container.selected .cup {
+    transform: scale(1.1) translateY(-10px);
+    filter: drop-shadow(0 0 15px var(--primary-color));
+}
+
+.cup-container.lifted .cup {
+    transform: translateY(-120px);
+}
+
+.ball-of-yarn { 
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.3s;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.cup-container.show-cat .ball-of-yarn {
+    opacity: 1;
+}
+
+/* Controles de Aposta (dentro do painel esquerdo) */
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.timer-container {
+    text-align: center;
+}
+
+#timer {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+#bet-amount {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    width: 100%; /* Ocupa a largura total do painel */
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+}
+
+#bet-presets {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+#bet-presets button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-grow: 1;
+    min-width: 80px; /* Garante que os botões não fiquem pequenos demais */
+}
+
+#bet-presets button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#start-game-button {
+    background: var(--primary-color);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%; /* Ocupa a largura total do painel */
+}
+
+#start-game-button:hover {
+    transform: scale(1.02); /* Escala menor para botões maiores */
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+#start-game-button:disabled {
+    background: #555;
+    color: #888;
+    cursor: not-allowed;
+    transform: scale(1);
+    box-shadow: none;
+}
+
+.message-panel {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    min-height: 20px; /* Altura mínima para evitar "pulos" */
+}
+
+/* Histórico de Partidas (dentro do painel direito) */
+#history-log {
+    height: calc(100% - 50px); /* Ocupa a altura restante da coluna, descontando o padding-top */
+    display: flex; /* Para flex-direction column */
+    flex-direction: column;
+}
+
+#history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Faz a lista crescer para ocupar o espaço */
+    overflow-y: auto; /* Adiciona scroll se houver muitos itens */
+    display: flex;
+    flex-direction: column-reverse; /* Mostra o item mais recente no topo */
+    gap: 5px; /* Espaço entre os itens da lista */
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9em;
+    align-items: center; /* Alinha texto e valor no centro verticalmente */
+}
+
+.history-item.win {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.history-item.loss {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
